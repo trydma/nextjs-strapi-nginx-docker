@@ -7,7 +7,6 @@ services:
       dockerfile: ../docker/development/Dockerfile.frontend
     ports:
       - '3000:3000'
-    restart: always
     environment:
       API_CONTAINER_URL: ${API_CONTAINER_URL}
       API_CLIENT_URL: ${API_CLIENT_URL}
@@ -15,6 +14,7 @@ services:
     volumes:
       - ../frontend/public:/frontend/public
       - ../frontend/src:/frontend/src
+    restart: always
     networks:
       - internal
     depends_on:
@@ -26,7 +26,6 @@ services:
       dockerfile: ../docker/development/Dockerfile.strapi
     ports:
       - '1337:1337'
-    restart: always
     environment:
       APP_KEYS: ${APP_KEYS}
       API_CLIENT_URL: ${API_CLIENT_URL}
@@ -46,6 +45,7 @@ services:
       - ../strapi/database:/strapi/database
       - ../strapi/public:/strapi/public
       - ../strapi/src:/strapi/src
+    restart: always
     networks:
       - internal
     depends_on:
@@ -53,13 +53,13 @@ services:
 
   database:
     image: postgres:14-alpine
-    restart: always
     environment:
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
       POSTGRES_USER: ${DATABASE_USERNAME}
       POSTGRES_DB: ${DATABASE_NAME}
     volumes:
       - postgresql_database:/var/lib/postgresql/data
+    restart: always
     networks:
       - internal
 
