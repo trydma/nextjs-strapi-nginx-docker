@@ -4,32 +4,33 @@
   "version": "0.1.0",
   "description": "A Strapi application",
   "scripts": {
+    "build": "strapi build",
+    "deploy": "strapi deploy",
     "develop": "strapi develop",
     "start": "strapi start",
-    "build": "strapi build",
     "strapi": "strapi"
   },
-  "devDependencies": {},
   "dependencies": {
-    "@strapi/strapi": "4.25.11",
-    "@strapi/plugin-users-permissions": "4.25.11",
-    "@strapi/plugin-i18n": "4.25.11",
-    "@strapi/plugin-cloud": "4.25.11",
-    "pg": "8.13.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "5.3.4",
-    "styled-components": "5.3.3"
+    "@strapi/plugin-cloud": "5.4.2",
+    "@strapi/plugin-users-permissions": "5.4.2",
+    "@strapi/strapi": "5.4.2",
+    "pg": "8.8.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-router-dom": "^6.0.0",
+    "styled-components": "^6.0.0"
   },
-  "author": {
-    "name": "A Strapi developer"
-  },
-  "strapi": {
-    "uuid": "c650d6c8-4d97-45c6-9f2f-855049159cac"
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5"
   },
   "engines": {
-    "node": ">=18.0.0 <=20.x.x",
+    "node": ">=18.0.0 <=22.x.x",
     "npm": ">=6.0.0"
   },
-  "license": "MIT"
+  "strapi": {
+    "uuid": "db3a7efe-ba42-4c13-ace2-3c66e9ea2102"
+  }
 }
