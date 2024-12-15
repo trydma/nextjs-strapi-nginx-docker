@@ -2,12 +2,12 @@ FROM node:20-alpine
 
 WORKDIR /strapi
 
-COPY package*.json ./
+COPY package.json yarn.lock ./
 
-RUN npm install
+RUN yarn install
 
 COPY . ./
 
 EXPOSE 1337
 
-CMD [ "npm", "run", "develop" ]
+CMD [ "yarn", "develop" ]
