@@ -22,6 +22,7 @@ ENV API_TOKEN=${API_TOKEN}
 
 COPY healthcheck.strapi.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/healthcheck.strapi.sh
-ENTRYPOINT ["/usr/local/bin/healthcheck.strapi.sh"]
 
 EXPOSE 3000
+
+ENTRYPOINT ["/usr/local/bin/healthcheck.strapi.sh"]

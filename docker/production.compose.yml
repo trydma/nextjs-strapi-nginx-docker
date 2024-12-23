@@ -9,9 +9,11 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ../nginx/logs/:/var/log/nginx
+      - ../nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ../nginx/default.conf:/etc/nginx/default.conf:ro
       - ../certbot/www:/var/www/certbot/:ro
       - ../certbot/conf/:/etc/nginx/ssl/:ro
+      - ../nginx/logs/:/var/log/nginx
     restart: unless-stopped
     networks:
       - internal
