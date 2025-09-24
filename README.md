@@ -12,17 +12,29 @@ Next.js, Strapi, PostgreSQL, Nginx, Docker.
 
 #### Running containers for development
 ```
-docker-compose -f development.compose.yml up --build
+docker compose -f development.compose.yml --env-file .env.development up --build
+```
+or
+```
+./compose.sh development up --build
 ```
 
 #### Running containers for production
 ```
-docker-compose -f production.compose.yml up -d --build
+docker compose -f production.compose.yml --env-file .env.production up -d --build
+```
+or
+```
+./compose.sh production up -d --build
 ```
 
 #### Removing containers
 ```
-docker-compose -f *.compose.yml down
+docker compose -f *.compose.yml down
+```
+or
+```
+./compose.sh * down
 ```
 
 ## Strapi 🛠️
@@ -41,5 +53,5 @@ npm run strapi import -- -f name_import_file.tar
 ## Certbot 🤖
 #### Obtaining ssl certificate
 ```
-docker-compose -f production.compose.yml run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d [domain-name]
+docker compose -f production.compose.yml run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d [domain-name]
 ```
