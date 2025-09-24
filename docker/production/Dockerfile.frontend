@@ -1,6 +1,7 @@
-FROM node:20-alpine
+FROM node:22-alpine
 
-RUN apk update && apk add --no-cache curl yarn
+RUN apk update && apk add --no-cache curl
+RUN npm install -g pnpm@latest
 
 ARG API_CONTAINER_URL
 ARG API_CLIENT_URL
@@ -8,11 +9,9 @@ ARG API_TOKEN
 
 WORKDIR /frontend
 
-RUN yarn global add pm2
+COPY package.json pnpm-lock.yaml ./
 
-COPY package.json yarn.lock ./
-
-RUN yarn install --production
+RUN pnpm install
 
 COPY . ./
 

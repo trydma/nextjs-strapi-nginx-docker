@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# if the script is not defined in the container, change CRLF to LF.
+
 echo "Waiting for Strapi to be ready..."
 
 until curl -s http://strapi:1337/_health > /dev/null; do
@@ -8,8 +10,8 @@ until curl -s http://strapi:1337/_health > /dev/null; do
 done
 
 echo "Strapi is ready. Starting build process."
-yarn build || { echo "Build failed!"; exit 1; }
+pnpm build || { echo "Build failed!"; exit 1; }
 
 echo "Build completed. Starting the application."
 
-pm2-runtime start "yarn start" --name api || { echo "Application failed to start!"; exit 1; }
+exec pnpm start || { echo "Application failed to start!"; exit 1; }
