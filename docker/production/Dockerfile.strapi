@@ -1,23 +1,21 @@
-FROM node:20-alpine
+FROM node:22-alpine
 
-RUN apk update && apk add --no-cache yarn
+RUN npm install -g pnpm@latest
 
 ARG API_CLIENT_URL
 
 WORKDIR /strapi
 
-RUN yarn global add pm2
+COPY package.json pnpm-lock.yaml ./
 
-COPY package.json yarn.lock ./
-
-RUN yarn install --production
+RUN pnpm install
 
 COPY . ./
 
 ENV API_CLIENT_URL=${API_CLIENT_URL}
 
-RUN yarn build
+RUN pnpm run build
 
 EXPOSE 1337
 
-CMD ["pm2-runtime", "start", "yarn start", "--name", "api"]
+CMD ["pnpm", "run", "start"]
