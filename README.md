@@ -37,6 +37,16 @@ or
 ./compose.sh * down
 ```
 
+#### Running a scheduled docker cleanup script:
+```
+./setup-docker-cleanup-cron.sh
+```
+
+#### Running a docker cleanup script:
+```
+./docker-cleanup.sh
+```
+
 ## Strapi 🛠️
 #### Data export without encryption and compression:
 *Local*
