@@ -12,39 +12,45 @@ Next.js, Strapi, PostgreSQL, Nginx, Docker.
 
 #### Running containers for development:
 ```
+cd docker
+
 docker compose -f development.compose.yml --env-file .env.development up --build
 ```
 or
 ```
-./compose.sh development up --build
+./docker/compose.sh development up --build
 ```
 
 #### Running containers for production:
 ```
+cd docker
+
 docker compose -f production.compose.yml --env-file .env.production up -d --build
 ```
 or
 ```
-./compose.sh production up -d --build
+./docker/compose.sh production up -d --build
 ```
 
 #### Removing containers:
 ```
+cd docker
+
 docker compose -f *.compose.yml down
 ```
 or
 ```
-./compose.sh * down
+./docker/compose.sh * down
 ```
 
 #### Running a scheduled docker cleanup script:
 ```
-./setup-docker-cleanup-cron.sh
+./scripts/setup-docker-cleanup-cron.sh
 ```
 
 #### Running a docker cleanup script:
 ```
-./docker-cleanup.sh
+./scripts/docker-cleanup.sh
 ```
 
 ## Strapi 🛠️
@@ -56,12 +62,12 @@ pnpm run strapi export --no-encrypt --no-compress -f export-data
 
 *Development*
 ```
-./export-strapi-development.sh containerId?
+./scripts/export-strapi-development.sh containerId?
 ```
 
 *Production*
 ```
-./export-strapi-production.sh user@host containerId?
+./scripts/export-strapi-production.sh user@host containerId?
 ```
 
 #### Data import:
@@ -72,16 +78,26 @@ pnpm run strapi import -f export-data.tar
 
 *Development*
 ```
-./import-strapi-development.sh containerId?
+./scripts/import-strapi-development.sh containerId?
 ```
 
 *Production*
 ```
-./import-strapi-production.sh user@host containerId?
+./scripts/import-strapi-production.sh user@host containerId?
 ```
 
 ## Certbot 🤖
 #### Obtaining ssl certificate:
 ```
 docker compose -f production.compose.yml run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d [domain-name]
+```
+
+#### Setting up automatic certificate renewal:
+```
+./scripts/setup-certbot-cron.sh
+```
+
+#### Manual certificate renewal:
+```
+./scripts/renew-certbot.sh
 ```
